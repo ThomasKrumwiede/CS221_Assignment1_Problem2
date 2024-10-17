@@ -11,15 +11,14 @@ using namespace std;
 List::List ()
 {
    first = NULL;
+   last = NULL;
 }
 
 // Destructor
-List::~List ()
-{
+List::~List (){
     Node *next_node;
 
-    while (first != NULL)
-    {
+    while (first != NULL){
         next_node = first->next;
         delete first;
         first = next_node;
@@ -27,16 +26,23 @@ List::~List ()
 }
 
 // Insert at front of list
-void List::frontInsert (int value)
-{
+void List::frontInsert (int value){
     Node *new_node;
 
     new_node = new Node;
-    if (new_node == NULL)
-    {
+	//Make sure that the new node is not NULL 
+    if (new_node == NULL){
         cout << "Unable to allocate memory. Insertion cancelled." << endl;
         return;
     }
+
+	//Check to see if the node being inserted will be the only node in the list 
+	//if new_node is the only node in the list set last to point to new_node
+	if (first == NULL) {
+		last = new_node;
+	}
+
+	//Insert new_node at the front of the list if the list is not empty
     new_node->data = value;
     new_node->next = first;
     first = new_node;
@@ -55,14 +61,17 @@ void List::rearInsert (int value)
     }
     new_node->data = value;
     new_node->next = NULL;
-    if (first == NULL)
-        first = new_node;
+	if (first == NULL) {
+		first = new_node;
+		last = new_node;
+	}
     else
     {
-        current = first;
-        while (current->next != NULL) 
-			current = current->next;
+        current = last;
+        //while (current->next != NULL) 
+			//current = current->next;
         current->next = new_node;
+		last = new_node;
     }
 	///does not maintain last
 }

@@ -29,6 +29,7 @@ protected:
     };
 
 	Node *first;
+    Node* last;
 };
 
 #endif
