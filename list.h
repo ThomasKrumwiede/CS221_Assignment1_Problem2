@@ -5,6 +5,9 @@
 #include <iostream>
 using namespace std;
 
+class List;
+class Iterator;
+
 #ifndef LIST_H
 #define LIST_H
 
@@ -19,7 +22,14 @@ public:
 	int rearDelete();
 	int length() const;
 
+    //Part D member function using the iterator class 
+    Iterator begin();
+    Iterator end();
+    void insert(Iterator iter, int insert_dateValue);
+    void delete_node(Iterator iter);
+
     friend ostream& operator<< (ostream& out, List& l);  // print the list
+
     
 protected:
     struct Node
@@ -28,7 +38,10 @@ protected:
         Node *next;
     };
 
-	Node *first;
+	Node* first;
+    Node* last;
+
+    friend class Iterator;
 };
 
 #endif

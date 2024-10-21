@@ -5,10 +5,12 @@
 
 
 #include <iostream>
-using namespace std;
 #include "list.h"
+#include "Iterator.h"
+using namespace std;
 
-void main ()
+
+int main ()
 {
    List l;
 
@@ -32,5 +34,64 @@ void main ()
 	   cout << "The list is: " << l << endl;
 	   
    }  
-   system("pause");   
+
+   //Test the additions required from Assignment 1 Problem 2
+   cout << "\n" << "Assingment 1 Problem 2:" << endl;
+
+   List problem2list;
+   problem2list.frontInsert(2);
+   problem2list.frontInsert(1);
+   problem2list.rearInsert(3);
+   problem2list.rearInsert(4);
+   problem2list.rearInsert(5);
+   problem2list.rearInsert(6);
+
+   //test part c
+
+   //Test List::begin()
+   Iterator position_begin;
+   position_begin = problem2list.begin();
+   for (int i = 0; i < 7; i++) {
+		cout << "postition_begin = " << position_begin.get() << endl;
+		position_begin.next();
+   }
+   
+
+   //Test List::end()
+   Iterator position_end;
+   position_end = problem2list.end();
+   for (int i = 0; i < 7; i++) {
+	   cout << "position_end = " << position_end.get() << endl;
+	   position_end.previous();
+   }
+   
+   //Test of the insert method 
+   position_begin = problem2list.begin();
+   for (int i = 0; i < 3; i++) {
+	   position_begin.next();
+   }
+
+   problem2list.insert(position_begin, 99);
+
+   cout << '\n' <<  "Testing insert: " << endl;
+   position_begin = problem2list.begin();
+   for (int i = 0; i < 8; i++) {
+	   cout << "postition_begin = " << position_begin.get() << endl;
+	   position_begin.next();
+   }
+
+
+   
+   
+   //Test Iterator::equals()
+   //using Iterator::next() and Iterator::previous()
+  // while (!position_begin.equals(position_end)) {
+	   //position_begin.next();
+	   //position_end.previous();
+	//}
+   //cout << "Iterator is equal when position_begin = " << position_begin.get()
+	   //<< "and position_end = " << position_end.get();
+
+  
+   return 0;
 }
